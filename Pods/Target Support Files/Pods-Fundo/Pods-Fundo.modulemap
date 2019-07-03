@@ -1,0 +1,6 @@
+framework module Pods_Fundo {
+  umbrella header "Pods-Fundo-umbrella.h"
+
+  export *
+  module * { export * }
+}
