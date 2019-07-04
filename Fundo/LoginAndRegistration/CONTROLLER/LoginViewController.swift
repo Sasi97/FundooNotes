@@ -29,7 +29,7 @@ class LoginViewController: UIViewController,GIDSignInDelegate,GIDSignInUIDelegat
             print(error.localizedDescription)
             return
         }
-        
+        print("\(user?.profile?.email)")
         NotificationCenter.default.post(name: NSNotification.Name("GoogleUser"), object: nil, userInfo: ["User":user])
     }
    

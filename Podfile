@@ -7,6 +7,8 @@ target 'Fundo' do
 	pod 'SJSwiftSideMenuController'
 	pod 'GoogleSignIn'
 	pod 'Firebase/Auth'
+	pod 'FBSDKLoginKit'
+	pod 'FBSDKShareKit'
 
   # Pods for Fundo
 

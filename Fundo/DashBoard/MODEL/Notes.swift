@@ -15,7 +15,7 @@ struct Note {
     var color:String?
     var isPinned:Bool?
     var isArchived:Bool?
-    var remainder:Date = Date()
+    var remainder:Date?
     
     static var idFactory = 0
     

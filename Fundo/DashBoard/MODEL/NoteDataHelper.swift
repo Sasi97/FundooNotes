@@ -77,8 +77,33 @@ class NoteDataHelper{
     func getPinnedNotes() -> [Note] {
         var listOfNotes = [Note]()
         let fetchedRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Notes")
-        fetchedRequest.predicate = NSPredicate(format: "isPinned == TRUE")
+        fetchedRequest.predicate = NSPredicate(format: "isPinned == TRUE ")
 
+        do{
+            let listOfDBNotes = try managedObjectContext.fetch(fetchedRequest) as! [NSManagedObject]
+            for dbNote in listOfDBNotes {
+                let noteId = dbNote.value(forKey: Keys.noteId.rawValue) as! Int
+                let noteTitle = dbNote.value(forKey: Keys.title.rawValue) as! String
+                let noteDesc = dbNote.value(forKey: Keys.description.rawValue) as! String
+                let noteColor = dbNote.value(forKey: Keys.color.rawValue) as! String
+                let noteIsPinned = dbNote.value(forKey: Keys.pinned.rawValue) as! Bool
+                let noteIsArchived = dbNote.value(forKey: Keys.archived.rawValue) as! Bool
+                let noteRemainder = dbNote.value(forKey: Keys.remainder.rawValue) as! Date
+                var foundNote = Note.init(title: noteTitle, description: noteDesc, color: noteColor, isPinned: noteIsPinned,isArchived: noteIsArchived,remainder: noteRemainder)
+                foundNote.updateId(noteId: noteId)
+                listOfNotes.append(foundNote)
+            }
+        }catch{
+            print("ERROR IN FETCHING")
+        }
+        
+        return listOfNotes
+    }
+    func getArchivedNotes() -> [Note] {
+        var listOfNotes = [Note]()
+        let fetchedRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Notes")
+        fetchedRequest.predicate = NSPredicate(format: "isArchived == TRUE ")
+        
         do{
             let listOfDBNotes = try managedObjectContext.fetch(fetchedRequest) as! [NSManagedObject]
             for dbNote in listOfDBNotes {
@@ -111,16 +136,14 @@ class NoteDataHelper{
             print(fetchArray)
             for i in 0..<fetchArray.count{
                 let mngObj = fetchArray[i] as! NSManagedObject
-//            var fetchArray = try managedObjectContext.fetch(fr)
-//            print(fetchArray)
-//                let mngObj = fetchArray[indexPath.row] as! NSManagedObject
                  mngObj.setValue(updateNote.title, forKey: Keys.title.rawValue)
                 mngObj.setValue(updateNote.description ?? "", forKey: Keys.description.rawValue)
                 mngObj.setValue(updateNote.color ?? "", forKey: Keys.color.rawValue)
                 mngObj.setValue(updateNote.isPinned , forKey: Keys.pinned.rawValue)
+                mngObj.setValue(updateNote.remainder, forKey: Keys.remainder.rawValue)
+                mngObj.setValue(updateNote.isArchived, forKey: Keys.archived.rawValue)
                 do{
                     try managedObjectContext.save()
-//                    fetchArray[indexPath.row] = mngObj
                 }catch{
                     print("error in updating")
                 }

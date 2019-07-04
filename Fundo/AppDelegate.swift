@@ -10,9 +10,10 @@ import UIKit
 import CoreData
 import GoogleSignIn
 import Firebase
-
+import UserNotifications
+import FBSDKLoginKit
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate
+class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate,UNUserNotificationCenterDelegate
 {
     
     
@@ -24,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate
         // Override point for customization after application launch.
         GIDSignIn.sharedInstance().clientID = "1048474593295-p9beiv3m3l90p0utltcj09eb5u2i92d5.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().delegate = self
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
         FirebaseApp.configure()
         
         return true
@@ -56,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate
 //            // ...
 //        }
     }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -78,6 +82,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.badge,.alert, .sound])
     }
 
     // MARK: - Core Data stack
@@ -125,6 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,GIDSignInDelegate
             }
         }
     }
+   
 
 }
 

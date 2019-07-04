@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fundo/DashBoard/MODEL/NoteDataHelper.swift"
-            timestampString = "583507756.904761"
+            timestampString = "583936822.435769"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "updateNote(updateNote:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,7 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fundo/DashBoard/MODEL/NoteDataHelper.swift"
-            timestampString = "583507756.904843"
+            timestampString = "583936822.435867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
@@ -186,12 +186,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fundo/DashBoard/CONTROLLER/EditAndAddNotes.swift"
-            timestampString = "583855136.514099"
+            timestampString = "583936822.435956"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "viewWillDisappear(_:)"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "colorToView()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -202,12 +202,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fundo/DashBoard/CONTROLLER/EditAndAddNotes.swift"
-            timestampString = "583855136.51476"
+            timestampString = "583936822.43602"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "viewWillDisappear(_:)"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "colorToView()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fundo/DashBoard/MODEL/NoteDataHelper.swift"
-            timestampString = "583507756.905865"
+            timestampString = "583936822.4361629"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "updateNote(updateNote:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fundo/DashBoard/MODEL/NoteDataHelper.swift"
-            timestampString = "583507756.905967"
+            timestampString = "583936822.436244"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "updateNote(updateNote:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fundo/DashBoard/MODEL/NoteDataHelper.swift"
-            timestampString = "583507756.906062"
+            timestampString = "583936822.436325"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "updateNote(updateNote:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Fundo/DashBoard/CONTROLLER/EditAndAddNotes.swift"
-            timestampString = "583855136.515564"
+            timestampString = "583936822.436402"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "bindingData()"
             landmarkType = "7">
          </BreakpointContent>

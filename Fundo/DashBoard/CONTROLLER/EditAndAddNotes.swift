@@ -28,7 +28,8 @@ class EditAndAddNotes: UIViewController {
     var noteHelper = NoteDataHelper()
     var datePicker:UIDatePicker!
     let current = Calendar.current
-
+    var noteRemainder:Date?
+    let center = UNUserNotificationCenter.current()
     var colorData:[UIColor] = [#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1),#colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1),#colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1),#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 0.8795216182),#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1),#colorLiteral(red: 0.4513868093, green: 0.9930960536, blue: 1, alpha: 0.7726080908),#colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1),#colorLiteral(red: 0.9411764741, green: 0.4980392158, blue: 0.3529411852, alpha: 1),#colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1),#colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,31 +47,47 @@ class EditAndAddNotes: UIViewController {
 //        inputDateFld.text = (noteToEdit?.remainder) as! String ?? ""
 
     }
-   private func setDatePicker()
-    {
-        datePicker = UIDatePicker()
-        datePicker.datePickerMode = .dateAndTime
-        datePicker.addTarget(self, action: #selector(dateValueChanged(datePicker:)), for: .valueChanged)
-         inputDateFld.inputView = datePicker
-        
-    }
+  
     private func setupGesture(){
         _ = UITapGestureRecognizer(target: self, action: #selector(viewTapped(gesture:)))
     }
     @objc private func viewTapped(gesture:UITapGestureRecognizer){
         view.endEditing(true)
     }
+    private func requestForAuthorization() {
+        
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            if granted {
+                print("permission granted")
+            } else {
+                print("permission not granted")
+            }
+            
+            guard let error = error  else { return }
+            print(error.localizedDescription)
+        }
+    }
+    private func setDatePicker()
+    {
+        requestForAuthorization()
+        datePicker = UIDatePicker()
+        datePicker.datePickerMode = .dateAndTime
+        datePicker.addTarget(self, action: #selector(dateValueChanged(datePicker:)), for: .valueChanged)
+        inputDateFld.inputView = datePicker
+        registerNotification(date: datePicker.date)
+        
+    }
     @objc func dateValueChanged(datePicker: UIDatePicker){
         
         let dateFormat = DateFormatter()
-        dateFormat.dateFormat  = "yyyy-MM-dd hh:mm:ss a"
+        dateFormat.dateFormat  = "yyyy-mm-dd hh:mm:ss"
         inputDateFld.text = dateFormat.string(from: datePicker.date)
-//        date = dateFormat.date(from: inputDateFld.text!)!
+        noteRemainder = dateFormat.date(from: inputDateFld.text ?? "")
         datePicker.endEditing(true)
         
     }
     private func registerNotification(date: Date) {
-        let center = UNUserNotificationCenter.current()
+       
         let content = UNMutableNotificationContent()
         content.title = "Reminder"
         content.body = "Do you want the system to send notification"
@@ -107,8 +124,8 @@ class EditAndAddNotes: UIViewController {
             print("function returned")
             return }
 
-        let noteRemainder = Date()
-        var noteDetails = Note(title: title , description: noteDescription, color: color, isPinned: isPinned,isArchived: isArchived,remainder: noteRemainder)
+        print(datePicker.date)
+        var noteDetails = Note(title: title , description: noteDescription, color: color, isPinned: isPinned,isArchived: isArchived,remainder: datePicker.date  )
         if isEditable {
             noteDetails.updateId(noteId: noteToEdit!.noteId)
             noteHelper.updateNote(updateNote: noteDetails)

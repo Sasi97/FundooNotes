@@ -30,7 +30,7 @@ class NotesCollectionViewController: UICollectionViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCell()
-        initList()
+        listOfNotes = noteHelper.getAllNotes()
         collectionView.reloadData()
         registerHeader()
         addObserver()
@@ -49,9 +49,26 @@ class NotesCollectionViewController: UICollectionViewController{
     }
     private func addObserver(){
          NotificationCenter.default.addObserver(self, selector: #selector(layoutChanged(_:)), name: NSNotification.Name("CollectionViewLayouts"), object: nil)
+       
 
     }
-    
+    @objc private func showNotes(_ notification : NSNotification) {
+        let indexPath : Int = notification.userInfo!["indexPath"] as! Int
+        switch indexPath {
+        case 0:
+            listOfNotes = noteHelper.getAllNotes()
+            collectionView.reloadData()
+        case 1 :
+            listOfNotes = noteHelper.getPinnedNotes()
+            collectionView.reloadData()
+        case 2 :
+            listOfNotes = noteHelper.getArchivedNotes()
+            collectionView.reloadData()
+        default:
+            listOfNotes = noteHelper.getAllNotes()
+            collectionView.reloadData()
+        }
+    }
     @objc func layoutChanged(_ notification : NSNotification) {
         let selectedSegment : Int = notification.userInfo!["segmentIndex"] as! Int
         switch selectedSegment {
@@ -68,14 +85,12 @@ class NotesCollectionViewController: UICollectionViewController{
         collectionView.register(UINib.init(nibName: "NoteCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
     }
     override func viewWillAppear(_ animated: Bool) {
-        initList()
-        print(listOfNotes!)
+        listOfNotes=noteHelper.getAllNotes()
+         NotificationCenter.default.addObserver(self, selector: #selector(showNotes(_:)), name: NSNotification.Name("DisplayNotes"), object: nil)
+        
         collectionView.reloadData()
     }
-    private func initList() {
-       listOfNotes = noteHelper.getAllNotes()
-      //  listOfNotes = noteHelper.getPinnedNotes()
-    }
+   
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
        return 1

@@ -32,7 +32,12 @@ extension SideMenuViewController:UITableViewDelegate,UITableViewDataSource {
         case nameForIndexpath.notes.rawValue :
         NotificationCenter.default.post(name:NSNotification.Name("SideMenu"),object: nil)
             NotificationCenter.default.post(name: NSNotification.Name("DisplayNotes"), object: nil, userInfo: ["indexPath":indexPath.row])
-        case nameForIndexpath.isPinned.rawValue: break
+        case nameForIndexpath.isPinned.rawValue:
+            NotificationCenter.default.post(name:NSNotification.Name("SideMenu"),object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name("DisplayNotes"), object: nil, userInfo: ["indexPath":indexPath.row])
+        case nameForIndexpath.isArchived.rawValue:
+            NotificationCenter.default.post(name:NSNotification.Name("SideMenu"),object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name("DisplayNotes"), object: nil, userInfo: ["indexPath":indexPath.row])
            
         default:
             print("default")
